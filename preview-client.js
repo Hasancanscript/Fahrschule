@@ -5,7 +5,7 @@
   const pathname = value => value === BASE ? '/' : value.startsWith(BASE + '/') ? value.slice(BASE.length) : value;
   const snapshots = { '/api/public/offers': '/preview-data/offers.json', '/api/gifts/settings': '/preview-data/gifts.json', '/api/vku': '/preview-data/vku.json', '/api/nothelferkurs': '/preview-data/nothelferkurs.json' };
   const french = () => { try { return localStorage.getItem('lang') === 'fr'; } catch { return false; } };
-  const message = () => french() ? 'Aperçu privé. Les réservations, commandes et connexions sont désactivées.' : 'Private Vorschau. Buchungen, Bestellungen und Anmeldung sind deaktiviert.';
+  const message = () => french() ? 'Aperçu du site. Les réservations, commandes et connexions sont désactivées.' : 'Websitevorschau. Buchungen, Bestellungen und Anmeldung sind deaktiviert.';
   function notice() { const node = document.getElementById('preview-notice'); if (node) { node.textContent = message(); node.setAttribute('role','status'); } }
   window.fetch = (input, options = {}) => {
     const url = new URL(typeof input === 'string' || input instanceof URL ? String(input) : input.url, location.href);
