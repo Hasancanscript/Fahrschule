@@ -1,0 +1,275 @@
+// Prisma schema for the Fahrschule (driving school) booking app
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum CourseType {
+  VKU
+  NOTHELFER
+}
+
+model User {
+  id             String          @id @default(cuid())
+  name           String
+  email          String          @unique
+  password       String
+  phone          String?
+  role           Role            @default(CUSTOMER)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  bookings       Booking[]
+  packages       UserPackage[]
+  courseBookings CourseBooking[]
+  notifications CustomerNotification[]
+}
+
+model Service {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  durationMin Int       @default(45)
+  priceCents  Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  bookings    Booking[]
+  discountPercent Int @default(0)
+  publicKey String? @unique
+}
+
+model Slot {
+  id        String    @id @default(cuid())
+  startTime DateTime
+  endTime   DateTime
+  isBooked  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  bookings  Booking[]
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  serviceId     String
+  service       Service       @relation(fields: [serviceId], references: [id])
+  slotId        String
+  slot          Slot          @relation(fields: [slotId], references: [id], onDelete: Cascade)
+  status        BookingStatus @default(PENDING)
+  notes         String?
+  userPackageId String?
+  userPackage   UserPackage?  @relation(fields: [userPackageId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([slotId])
+}
+
+model Package {
+  id           String        @id @default(cuid())
+  name         String
+  lessonsTotal Int
+  priceCents   Int
+  createdAt    DateTime      @default(now())
+  userPackages UserPackage[]
+  discountPercent Int @default(0)
+  publicKey String? @unique
+  description String?
+}
+
+model UserPackage {
+  id               String    @id @default(cuid())
+  userId           String
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  packageId        String
+  package          Package   @relation(fields: [packageId], references: [id])
+  lessonsRemaining Int
+  purchasedAt      DateTime  @default(now())
+  bookings         Booking[]
+}
+
+// Group course dates (VKU, Nothelferkurs): multiple seats per date, unlike the 1:1 driving-lesson Slot model above.
+model CourseDate {
+  id        String          @id @default(cuid())
+  type      CourseType      @default(VKU)
+  startTime DateTime
+  endTime   DateTime
+  capacity  Int             @default(12)
+  location  String?
+  createdAt DateTime        @default(now())
+  bookings  CourseBooking[]
+}
+
+model CourseBooking {
+  id           String        @id @default(cuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseDateId String
+  courseDate   CourseDate    @relation(fields: [courseDateId], references: [id], onDelete: Cascade)
+  status       BookingStatus @default(CONFIRMED)
+  createdAt    DateTime      @default(now())
+
+  @@unique([userId, courseDateId])
+}
+
+
+// Payment records retain the agreed price independently of later catalogue edits.
+model Invoice {
+  id String @id @default(cuid())
+  source String
+  sourceId String
+  description String
+  customerName String
+  customerEmail String
+  baseCents Int?
+  discountPercent Int @default(0)
+  amountCents Int?
+  createdAt DateTime @default(now())
+  paidAt DateTime?
+  paymentMethod String?
+  refundedAt DateTime?
+  cancelledAt DateTime?
+  payments InvoicePayment[]
+  @@unique([source, sourceId])
+  @@index([paidAt])
+  @@index([createdAt])
+}
+
+model InvoicePayment {
+  id String @id @default(cuid())
+  invoiceId String
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Restrict)
+  requestId String @unique
+  kind String
+  amountCents Int
+  occurredAt DateTime
+  paymentMethod String
+  createdAt DateTime @default(now())
+  @@index([invoiceId, occurredAt])
+}
+
+enum GiftOrderStatus {
+  OPEN
+  PAID
+  CANCELLED
+}
+enum GiftMethod {
+  CASH
+  TWINT
+}
+enum GiftStatus {
+  INACTIVE
+  ACTIVE
+  REDEEMED
+  CANCELLED
+}
+model GiftSettings {
+  id String @id @default("default")
+  minCents Int @default(5000)
+  maxCents Int @default(100000)
+  updatedAt DateTime @updatedAt
+}
+model GiftOrder {
+  id String @id @default(cuid())
+  number String @unique
+  requestId String @unique
+  requestHash String
+  accessHash String
+  userId String?
+  firstName String
+  lastName String
+  email String
+  phone String
+  lang String
+  totalCents Int
+  requestedMethod GiftMethod
+  paidMethod GiftMethod?
+  status GiftOrderStatus @default(OPEN)
+  paidAt DateTime?
+  cancelledAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  vouchers GiftVoucher[]
+  events GiftEvent[]
+  mails GiftMail[]
+  @@index([status, createdAt])
+}
+model GiftVoucher {
+  id String @id @default(cuid())
+  orderId String
+  order GiftOrder @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  code String @unique
+  amountCents Int
+  remainingCents Int @default(0)
+  recipient String
+  message String
+  status GiftStatus @default(INACTIVE)
+  activatedAt DateTime?
+  redemptions GiftRedemption[]
+  @@index([orderId])
+}
+model GiftRedemption {
+  id String @id @default(cuid())
+  requestId String @unique
+  voucherId String
+  voucher GiftVoucher @relation(fields: [voucherId], references: [id], onDelete: Restrict)
+  amountCents Int
+  reference String
+  actorId String
+  createdAt DateTime @default(now())
+  @@index([voucherId])
+}
+model GiftEvent {
+  id String @id @default(cuid())
+  orderId String?
+  order GiftOrder? @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  actorId String?
+  kind String
+  detail Json
+  createdAt DateTime @default(now())
+  @@index([orderId, createdAt])
+}
+model GiftMail {
+  id String @id @default(cuid())
+  orderId String
+  order GiftOrder @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  key String @unique
+  kind String
+  status String @default("PENDING")
+  attempts Int @default(0)
+  lastError String?
+  sentAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([status, createdAt])
+}
+
+// Persistent account updates: only the owner can read or acknowledge them.
+model CustomerNotification {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind String
+  title String
+  detail Json
+  view String
+  readAt DateTime?
+  createdAt DateTime @default(now())
+  @@index([userId, readAt, createdAt])
+}

@@ -2,25 +2,181 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a1a;
+
+  --brand: #087a32;
+  --brand-dark: #404040;
+  --brand-blue: #0477ba;
+  --brand-blue-dark: #0b6aa1;
+  --brand-sky: #eef5f9;
+  --brand-ink: #1a1a1a;
+  --brand-gray: #595959;
+  --brand-gray-2: #808080;
+  --brand-bg-2: #f4f4f5;
+  --brand-amber: #ffc93f;
+  --brand-green: #087a32;
+  --brand-line: #e2e2e2;
+
+  /* Fahrschule fürs Leben: modern green/blue theme (public site) */
+  --surface: #ffffff;
+  --surface-2: #ffffff;
+  --card: #ffffff;
+  --ink: #141a17;
+  --accent: #087a32;
+  --accent-hover: #065c26;
+  --accent-dark: #087a32;
+  --action-green: #087a32;
+  --action-blue: #0848cc;
+  --action-blue-hover: #06379c;
+  --accent-soft: #f7f8fa;
+  --accent-2: #14baff;
+  --accent-2-dark: #0b6aa1;
+  --accent-2-soft: #e3f7ff;
+
+  /* Line-animation accent (rotating glow borders only) */
+  --line-accent: #3711bf;
+  --line-accent-2: #f24b4b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-}
+  --font-jakarta: var(--font-inter);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-brand-sky: var(--brand-sky);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-gray: var(--brand-gray);
+  --color-brand-gray-2: var(--brand-gray-2);
+  --color-brand-bg-2: var(--brand-bg-2);
+  --color-brand-amber: var(--brand-amber);
+  --color-brand-green: var(--brand-green);
+  --color-brand-line: var(--brand-line);
+
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-action-green: var(--action-green);
+  --color-action-blue: var(--action-blue);
+  --color-action-blue-hover: var(--action-blue-hover);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+  --color-accent-2-dark: var(--accent-2-dark);
+  --color-accent-2-soft: var(--accent-2-soft);
+  --color-line-accent: var(--line-accent);
+  --color-line-accent-2: var(--line-accent-2);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-bottom: 6rem;
+}
+
+.eyebrow {
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[marquee_32s_linear_infinite\],
+  .animate-\[marquee-reverse_38s_linear_infinite\] {
+    animation: none;
+  }
+}
+
+/* --- Fahrschule fürs Leben public site --- */
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.pulse-dot {
+  animation: soft-pulse 2.4s ease-in-out 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot {
+    animation: none;
+  }
+}
+
+
+/* Shared WCAG-oriented navigation, contrast and keyboard support. */
+:where(button, a, input, select, textarea, summary):focus-visible {
+  outline: 3px solid #08678f;
+  outline-offset: 4px;
+}
+:where(input, select, textarea) { border-color: #79847e; }
+:where(button, summary) { cursor: pointer; }
+:where(button:disabled) { cursor: not-allowed; }
+:where([id]) { scroll-margin-top: 6rem; }
+.skip-link { position: fixed; top: .75rem; left: 1rem; z-index: 100; transform: translateY(-200%); padding: .8rem 1.2rem; border-radius: .75rem; background: #fff; color: #141a17; font-weight: 700; border: 2px solid #08678f; }
+.skip-link:focus { transform: translateY(0); }
+/* Low-opacity muted text must still be readable on pale sections. */
+[class*="text-ink/"], [class*="text-brand-gray"] { color: #526057; }
+[class*="text-white/"] { color: #fff; }
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  [style*="opacity: 0"] { opacity: 1 !important; }
+}
+
+
+:where(p, li, dd) a { text-decoration: underline; text-underline-offset: .2em; }
+:where(h1, h2, h3, p, dd) { overflow-wrap: anywhere; }
+
+/* Keep the floating contact link clear of mobile safe areas and focused controls. */
+.whatsapp-contact { right: max(1.25rem, env(safe-area-inset-right)); bottom: max(1.25rem, env(safe-area-inset-bottom)); }
+body:has(input:focus, textarea:focus, select:focus) .whatsapp-contact { visibility: hidden; }
+body:has(dialog[open]) .whatsapp-contact { visibility: hidden; }
+@media (max-width: 639px) { .whatsapp-contact { right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); } }
+
+/* Wider public sections with comfortable gutters on every screen. */
+.site-container {
+  width: 100%;
+  max-width: 112rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 3vw, 4rem);
 }

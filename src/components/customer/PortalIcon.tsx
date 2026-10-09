@@ -1,0 +1,4 @@
+export default function PortalIcon({ name, className = "h-5 w-5" }: { name: "calendar" | "document" | "wallet" | "arrow" | "check" | "person"; className?: string }) {
+  const paths = { calendar: <><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M16 3v4M8 3v4M3 11h18M8 15h2M14 15h2" /></>, document: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5" /></>, wallet: <><rect x="3" y="5" width="18" height="15" rx="3" /><path d="M3 9h18M15 14h3M6 5V3h12" /></>, arrow: <path d="M5 12h14M13 6l6 6-6 6" />, check: <path d="m5 12 4 4L19 6" />, person: <><circle cx="12" cy="8" r="4" /><path d="M4 21v-2a8 8 0 0 1 16 0v2" /></> };
+  return <svg aria-hidden="true" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
+}
