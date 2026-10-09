@@ -1,0 +1,1 @@
+@keyframes route-flow{0%{stroke-dashoffset:0}to{stroke-dashoffset:-500px}}.route-flow{animation:3.6s linear infinite route-flow}@keyframes offer-border-flow{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.offer-border-flow{animation:6s linear infinite offer-border-flow}
