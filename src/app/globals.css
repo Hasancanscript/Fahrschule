@@ -176,7 +176,12 @@ body:has(dialog[open]) .whatsapp-contact { visibility: hidden; }
 /* Wider public sections with comfortable gutters on every screen. */
 .site-container {
   width: 100%;
-  max-width: 112rem;
+  max-width: 2560px;
   margin-inline: auto;
-  padding-inline: clamp(1.5rem, 3vw, 4rem);
+  padding-inline: 1.5rem;
+}
+/* Gleiche Abstände wie die Navigation, damit alles links bündig ist */
+@media (min-width: 640px) { .site-container { padding-inline: 2rem; } }
+@media (min-width: 1024px) { .site-container { padding-inline: 2.5rem; } }
+@media (min-width: 1536px) { .site-container { padding-inline: 3rem; }
 }

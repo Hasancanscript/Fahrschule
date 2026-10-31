@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export type InfoTopic = { title: string; text: string; banner?: string; href?: string; linkLabel?: string };
+export type InfoTopic = { title: string; text: string; banner?: string; href?: string; linkLabel?: string; links?: { href: string; label: string }[] };
 type Props = {
   imageSrc: string; imageAlt: string; imagePosition?: string; badgeText: string;
   eyebrow: string; title: string; description: string;
@@ -18,7 +18,7 @@ type Props = {
 export default function OfferInfoIntro({ imageSrc, imageAlt, imagePosition = "center", badgeText, eyebrow, title, description, topics, topicsTitle = "Inhalte", numbered = false, ctaHref, ctaLabel, facts }: Props) {
   return <TranslatedContent>{(
     <section className="site-container pt-10">
-      <Link href="/#angebote" className="inline-flex items-center gap-1.5 text-sm font-medium text-ink/50 transition hover:text-ink">← Zurück zu Angeboten</Link>
+      <Link href="/#angebote" className="inline-flex items-center gap-1.5 text-sm font-medium text-ink/65 transition hover:text-ink">← Zurück zu Angeboten</Link>
       <div className="mt-6 flex flex-col gap-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl">
           <Image preload src={imageSrc} alt={imageAlt} fill sizes="(min-width: 1792px) 1792px, 100vw" className="object-cover" style={{ objectPosition: imagePosition }} />
@@ -43,7 +43,10 @@ export default function OfferInfoIntro({ imageSrc, imageAlt, imagePosition = "ce
                 <h3 className={`font-jakarta font-bold text-white ${numbered ? "pt-1 text-base leading-snug sm:text-lg" : "text-sm"}`}>{topic.title}</h3>
                 <p className={numbered ? "mt-2 max-w-[75ch] text-sm leading-relaxed text-white sm:text-base" : "mt-0.5 text-sm leading-relaxed text-white/60"}>{topic.text}</p>
                 {topic.banner && <span className="mt-3 inline-flex items-start gap-2 rounded-xl border border-[#009fdf]/30 bg-accent-2-soft px-3 py-2 text-xs font-bold leading-relaxed text-ink sm:text-sm"><span aria-hidden="true">⚠️</span>{topic.banner}</span>}
-                {topic.href && <div><Link href={topic.href} className={numbered ? "mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white underline decoration-white/40 underline-offset-4 transition hover:decoration-[#009fdf] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#009fdf]" : "mt-2 inline-block rounded-md bg-[#009fdf] px-3 py-1.5 text-xs font-semibold text-ink transition hover:underline"}>{topic.linkLabel ?? "Mehr erfahren"} <span aria-hidden="true">→</span></Link></div>}
+                {[...(topic.href ? [{ href: topic.href, label: topic.linkLabel ?? "Mehr erfahren" }] : []), ...(topic.links ?? [])].map(link => {
+                  const external = link.href.startsWith("http");
+                  return <div key={link.href}><Link href={link.href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined} className={numbered ? "mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white underline decoration-white/40 underline-offset-4 transition hover:decoration-[#009fdf] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#009fdf]" : "mt-2 inline-block rounded-md bg-[#009fdf] px-3 py-1.5 text-xs font-semibold text-ink transition hover:underline"}>{link.label} <span aria-hidden="true">→</span></Link></div>;
+                })}
               </div>
             </li>)}
           </ol>

@@ -1,9 +1,10 @@
 "use client";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n";
 import { giftText, giftTotal, money, methodLabel } from "@/lib/gift-shared";
+import { saveLastOrder } from "./GiftConfirmation";
 import { useGiftCart } from "./GiftCartProvider";
 import {
   GiftShell,
@@ -12,7 +13,6 @@ import {
   GIFT_INPUT,
   GIFT_BUTTON,
 } from "./GiftCommon";
-type CheckoutContact = { name: string; email: string; phone: string | null };
 export function GiftCheckoutLoading() {
   const { lang } = useLanguage();
   return (
@@ -21,25 +21,17 @@ export function GiftCheckoutLoading() {
     </GiftShell>
   );
 }
-export default function GiftCheckout({ initialContact = null }: { initialContact?: CheckoutContact | null }) {
+export default function GiftCheckout() {
   const { lang } = useLanguage(),
     cart = useGiftCart(),
     router = useRouter(),
     t = (de: string, fr: string) => giftText(lang, de, fr);
-  const [form, setForm] = useState(() => {
-      const [firstName, ...lastName] = initialContact?.name.trim().split(/\s+/) ?? [""];
-      return {
-        firstName,
-        lastName: lastName.join(" "),
-        email: initialContact?.email ?? "",
-        phone: initialContact?.phone ?? "",
-      };
-    }),
+  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "" }),
     [method, setMethod] = useState("CASH"),
     [accepted, setAccepted] = useState(false),
     [busy, setBusy] = useState(false),
-    [error, setError] = useState("");
-  const request = useRef<{ hash: string; id: string } | null>(null);
+    [error, setError] = useState(""),
+    [website, setWebsite] = useState("");
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (busy) return;
@@ -67,26 +59,24 @@ export default function GiftCheckout({ initialContact = null }: { initialContact
         message,
       })),
     };
-    const hash = JSON.stringify(body);
-    if (request.current?.hash !== hash)
-      request.current = { hash, id: crypto.randomUUID() };
     try {
-      const response = await fetch("/api/gift-orders", {
+      const response = await fetch("/api/gutschein-anfrage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...body, requestId: request.current!.id }),
+        body: JSON.stringify({ ...body, website }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(response.status === 429 ? t("Zu viele Anfragen. Bitte versuche es später erneut.", "Trop de demandes. Réessaie plus tard.") : t("Bitte prüfe deine Angaben und versuche es erneut. Bei Fragen: 078 777 81 61.", "Vérifie tes données et réessaie. Pour toute question: 078 777 81 61."));
+      saveLastOrder({ number: data.number, method, totalCents: body.totalCents, items: body.items });
       cart.clear();
-      router.push(`/gutscheine/bestaetigung/${data.id}`);
+      router.push("/gutscheine/bestaetigung");
     } catch (e) {
       setError(
         e instanceof Error
           ? (e instanceof TypeError ? t("Die Verbindung ist unterbrochen. Bitte versuche es erneut.", "La connexion est interrompue. Réessaie.") : e.message)
           : t(
-              "Bestellung konnte nicht gespeichert werden.",
-              "La commande n’a pas pu être enregistrée.",
+              "Bestellung konnte nicht gesendet werden.",
+              "La commande n’a pas pu être envoyée.",
             ),
       );
     } finally {
@@ -115,11 +105,10 @@ export default function GiftCheckout({ initialContact = null }: { initialContact
             <legend className="mb-4 text-xl font-bold">
               {t("Deine Angaben", "Tes coordonnées")}
             </legend>
-            {initialContact && (
-              <p className="text-sm leading-relaxed text-ink/65">
-                {t("Deine Kontaktdaten wurden aus deinem Konto übernommen. Du kannst sie bei Bedarf anpassen oder fehlende Angaben ergänzen.", "Tes coordonnées ont été reprises de ton compte. Tu peux les modifier ou compléter les informations manquantes si nécessaire.")}
-              </p>
-            )}
+            {/* Für Menschen unsichtbar: Spam-Schutz */}
+            <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+              <label>Website<input tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} /></label>
+            </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {(
                 [
@@ -169,8 +158,8 @@ export default function GiftCheckout({ initialContact = null }: { initialContact
             <fieldset>
               <legend className="font-bold">
                 {t(
-                  "Gewünschte Bezahlung vor Ort",
-                  "Paiement souhaité sur place",
+                  "Gewünschte Bezahlung",
+                  "Paiement souhaité",
                 )}
               </legend>
               {["CASH", "TWINT"].map((m) => (
@@ -185,11 +174,7 @@ export default function GiftCheckout({ initialContact = null }: { initialContact
                     checked={method === m}
                     onChange={() => setMethod(m)}
                   />
-                  {methodLabel(m, lang)} ·{" "}
-                  {t(
-                    "persönlich beim Fahrlehrer",
-                    "en personne auprès du moniteur",
-                  )}
+                  {methodLabel(m, lang)}
                 </label>
               ))}
             </fieldset>
@@ -262,7 +247,7 @@ export default function GiftCheckout({ initialContact = null }: { initialContact
               <p className="break-all">{form.email}</p>
               <p>{form.phone}</p>
               <p className="mt-2">
-                {methodLabel(method, lang)} · {t("vor Ort", "sur place")}
+                {methodLabel(method, lang)}
               </p>
             </div>
             <Link
@@ -273,8 +258,8 @@ export default function GiftCheckout({ initialContact = null }: { initialContact
             </Link>
             <p className="mt-6 text-sm leading-relaxed">
               {t(
-                "Nach dem Absenden deiner Bestellung kontaktieren wir dich, um die Bezahlung vor Ort in bar oder mit TWINT zu vereinbaren. Jetzt wird kein Geld abgebucht.",
-                "Après l’envoi de ta commande, nous te contacterons pour convenir du paiement sur place, en espèces ou avec TWINT. Aucun montant n’est débité maintenant.",
+                "Nach dem Absenden melden wir uns bei dir und machen die Bezahlung (bar oder TWINT) mit dir ab. Jetzt wird kein Geld abgebucht.",
+                "Après l’envoi, nous te contactons pour convenir du paiement (en espèces ou avec TWINT). Aucun montant n’est débité maintenant.",
               )}
             </p>
             {error && (
@@ -289,7 +274,7 @@ export default function GiftCheckout({ initialContact = null }: { initialContact
             )}
             <button disabled={busy} className={`${GIFT_BUTTON} mt-5 w-full`}>
               {busy
-                ? t("Wird gespeichert …", "Enregistrement …")
+                ? t("Wird gesendet …", "Envoi …")
                 : t(
                     "Bestellung absenden",
                     "Envoyer la commande",

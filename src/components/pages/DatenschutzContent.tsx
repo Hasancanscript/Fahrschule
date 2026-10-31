@@ -8,7 +8,7 @@ import GiftPrivacy from "@/components/gifts/GiftPrivacy"; import LegalLayout fro
 
 export default function DatenschutzPage() {
   return <TranslatedContent>{(
-    <LegalLayout title="Datenschutzerklärung" updated="8. Oktober 2026"><GiftPrivacy/>
+    <LegalLayout title="Datenschutzerklärung" updated="31. Oktober 2026"><GiftPrivacy/>
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Verantwortliche Stelle</h2>
         <p className="mt-2">
@@ -22,40 +22,14 @@ export default function DatenschutzPage() {
           </a>
         </p>
         <p className="mt-2">
-          Diese Erklärung beschreibt, welche Personendaten wir beim Besuch der Website, bei der
-          Registrierung, bei Buchungen und bei der Kontaktaufnahme bearbeiten und wofür wir sie verwenden.
+          Diese Erklärung beschreibt, welche Personendaten wir beim Besuch der Website, bei Anfragen und Gutscheinbestellungen über die Formulare und bei der Kontaktaufnahme bearbeiten und wofür wir sie verwenden.
         </p>
       </section>
 
       <section>
-        <h2 className="font-jakarta text-lg font-bold text-ink">Registrierung und Kundenkonto</h2>
-        <p className="mt-2">
-          Du kannst auf dieser Website ein Kundenkonto erstellen, dich anmelden und deine Buchungen
-          verwalten. Bei der Registrierung erfassen wir deinen Namen, deine E-Mail-Adresse und dein
-          Passwort. Eine Telefonnummer kannst du freiwillig angeben.
-        </p>
-        <p className="mt-2">
-          Dein Passwort wird nicht im Klartext gespeichert, sondern als Passwort-Hash. Beim Anmelden
-          werden deine Zugangsdaten geprüft. Zusätzlich speichern wir den Erstellungs- und
-          Änderungszeitpunkt deines Kontos. Wir verwenden diese Daten, um dein Konto bereitzustellen,
-          dich anzumelden und deine Buchungen deinem Konto zuzuordnen.
-        </p>
-      </section>
-
-      <section>
-        <h2 className="font-jakarta text-lg font-bold text-ink">Fahrstunden, Kurse und Abonnemente</h2>
-        <p className="mt-2">
-          Wenn du über dein Kundenkonto eine Fahrstunde, einen VKU oder einen Nothelferkurs buchst,
-          speichern wir die Zuordnung zu deinem Konto, die gewählte Leistung, den Termin, den
-          Buchungsstatus und den Zeitpunkt der Buchung. Bei Fahrstunden werden auch freiwillig
-          eingegebene Bemerkungen gespeichert. Bei Abonnementen erfassen wir das gewählte Paket,
-          das Bezugsdatum, die verbleibenden Lektionen und die damit verbundenen Fahrstunden.
-        </p>
-        <p className="mt-2">
-          Wir verwenden diese Angaben zur Planung und Durchführung deiner Ausbildung, zur Verwaltung
-          von Terminen und Guthaben sowie zur Kommunikation über deine Buchungen. Für die Abrechnung speichern wir ausserdem die vereinbarten Preise und Rabatte sowie erfasste Zahlungseingänge, Zahlungsarten und Rückerstattungen. Diese Angaben dienen der Zahlungsverwaltung und den monatlichen Zahlungsübersichten. Die Online-Anmeldung
-          zu VKU und Nothelferkurs erfolgt über das Buchungssystem dieser Website.
-        </p>
+        <h2 className="font-jakarta text-lg font-bold text-ink">Anfragen für Fahrstunden und Kurse</h2>
+        <p className="mt-2">Wenn du über das Formular eine Fahrstunde, das 5er-Abo, einen VKU oder einen Nothelferkurs anfragst, erfassen wir deinen Namen, deine Telefonnummer, deine E-Mail-Adresse, das gewünschte Angebot, deine Wunschtermine, deine Sprache, bei Fahrstunden die Angabe zum Lernfahrausweis und deine freiwillige Nachricht.</p>
+        <p className="mt-2">Die Anfrage wird per E-Mail an unser Postfach bei Hostpoint AG (Schweiz) geschickt, und du erhältst eine Kopie an deine E-Mail-Adresse. Auf der Website selbst werden keine Anfragen gespeichert und es gibt kein Kundenkonto. Wir verwenden deine Angaben, um dich zu kontaktieren, Termine mit dir abzumachen und deine Ausbildung zu planen. Für die Abrechnung bewahren wir die dafür nötigen Angaben wie Termine, Preise und Zahlungen ausserhalb der Website auf.</p>
       </section>
 
       <section>
@@ -76,15 +50,10 @@ export default function DatenschutzPage() {
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Cookies und lokale Speicherung</h2>
         <p className="mt-2">
-          Für die Anmeldung und den geschützten Buchungsbereich verwenden wir technisch notwendige
-          Cookies, insbesondere zur Verwaltung deiner Sitzung und zur Absicherung der Anmeldung.
-          Deine Auswahl zur optionalen Google-Maps-Karte und deine Spracheinstellung (Deutsch oder Französisch) werden im lokalen Speicher deines Browsers
-          gespeichert. Die Website verwendet keine eigenen Marketing- oder Analyse-Cookies.
+          Diese Website verwendet keine Cookies für eine Anmeldung und keine eigenen Marketing- oder Analyse-Cookies. Deine Auswahl zur optionalen Google-Maps-Karte, deine Spracheinstellung (Deutsch oder Französisch) und dein Gutschein-Warenkorb werden im lokalen Speicher deines Browsers gespeichert.
         </p>
         <p className="mt-2">
-          Du kannst Cookies und lokale Daten in den Einstellungen deines Browsers löschen oder
-          blockieren. Wenn du notwendige Cookies blockierst, können Anmeldung und Buchungen
-          beeinträchtigt werden. Weitere Informationen findest du in unserer{" "}
+          Du kannst lokale Daten in den Einstellungen deines Browsers löschen oder blockieren. Weitere Informationen findest du in unserer{" "}
           <Link href="/cookies" className="text-accent-dark hover:underline">Cookie-Richtlinie</Link>.
         </p>
       </section>
@@ -110,28 +79,17 @@ export default function DatenschutzPage() {
       </section>
 
       <section>
+        <h2 className="font-jakarta text-lg font-bold text-ink">VKU-Anmeldung über SARI (asa)</h2>
+        <p className="mt-2">Auf der VKU-Seite ist die Kursübersicht von SARI VKU/PGS eingebunden. Das ist ein System der asa, Vereinigung der Strassenverkehrsämter, das von der KYBERNA AG (Vaduz, Liechtenstein) betrieben wird. Beim Laden der Kursübersicht wird eine Verbindung zu deren Server hergestellt. Dabei werden deine IP-Adresse und technische Browserdaten übermittelt, und es wird ein technisch notwendiges Sitzungscookie gesetzt.</p>
+        <p className="mt-2">Wenn du dich zu einem Kurs anmeldest, gibst du deine Angaben direkt in SARI ein. Sie werden dort für die Kursanmeldung bearbeitet. Du und die Fahrschule erhalten automatisch eine Bestätigung per E-Mail.</p>
+      </section>
+
+      <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Hosting und technische Daten</h2>
         <p className="mt-2">
           Diese Website wird bei Hostpoint AG (Schweiz) gehostet. Beim Aufruf werden technische
           Informationen wie IP-Adresse, Browsertyp und Zugriffszeitpunkt in Server-Logdateien
           gespeichert. Diese Daten dienen dem Betrieb und der Sicherheit der Website.
-        </p>
-      </section>
-
-      <section>
-        <h2 className="font-jakarta text-lg font-bold text-ink">Datenbank für Konten und Buchungen (Supabase)</h2>
-        <p className="mt-2">
-          Für die Speicherung der Kundenkonten und Buchungen nutzen wir eine Datenbank bei Supabase.
-          Dort werden deine Kontodaten einschliesslich des Passwort-Hashes, deine Buchungen,
-          freiwillige Bemerkungen und deine Abonnement-Guthaben gespeichert. Supabase stellt
-          die Datenbank als technischer Dienstleister bereit. Die Datenbank wird in Irland (Region West EU) betrieben. Deine Daten werden damit ausserhalb der Schweiz in einem EU-Mitgliedstaat gespeichert.
-        </p>
-        <p className="mt-2">
-          Informationen zum Anbieter findest du in der{" "}
-          <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" className="text-accent-dark hover:underline">
-            Datenschutzerklärung von Supabase
-          </a>
-          .
         </p>
       </section>
 
@@ -146,28 +104,20 @@ export default function DatenschutzPage() {
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Zugriff auf deine Daten</h2>
         <p className="mt-2">
-          Die Fahrschule kann im Verwaltungsbereich die für deine Betreuung erforderlichen
-          Kontaktdaten, Buchungen und Abonnemente einsehen und verwalten. Technische Dienstleister
-          können Daten bearbeiten, soweit dies für den Betrieb der Website und des Buchungssystems
-          erforderlich ist. Bei eingebundenen oder von dir genutzten externen Diensten erfolgt
-          die Datenbearbeitung wie in den jeweiligen Abschnitten beschrieben.
+          Anfragen und Gutscheinbestellungen erhält die Fahrschule per E-Mail. Hostpoint AG bearbeitet als technischer Dienstleister Daten, soweit dies für den Betrieb der Website und des E-Mail-Postfachs erforderlich ist. Bei eingebundenen oder von dir genutzten externen Diensten erfolgt die Datenbearbeitung wie in den jeweiligen Abschnitten beschrieben.
         </p>
       </section>
 
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Aufbewahrung und Löschung</h2>
         <p className="mt-2">
-          Wir bewahren Personendaten so lange auf, wie sie für dein Kundenkonto, die Durchführung
-          und Abwicklung deiner Ausbildung oder die Erfüllung gesetzlicher Aufbewahrungspflichten
-          erforderlich sind. Buchungs- und Abrechnungsbelege, die der gesetzlichen Buchführung dienen, werden grundsätzlich zehn Jahre aufbewahrt. Du kannst die Löschung deines Kontos und deiner Daten per E-Mail
-          beantragen. Dabei prüfen wir, welche Daten gelöscht werden können und welche aufgrund
-          gesetzlicher Pflichten oder zur Klärung offener Ansprüche noch benötigt werden.
+          Wir bewahren Personendaten so lange auf, wie sie für die Bearbeitung deiner Anfrage, die Durchführung und Abwicklung deiner Ausbildung oder die Erfüllung gesetzlicher Aufbewahrungspflichten erforderlich sind. Abrechnungsbelege, die der gesetzlichen Buchführung dienen, werden grundsätzlich zehn Jahre aufbewahrt. Du kannst die Löschung deiner Daten per E-Mail beantragen. Dabei prüfen wir, welche Daten gelöscht werden können und welche aufgrund gesetzlicher Pflichten oder zur Klärung offener Ansprüche noch benötigt werden.
         </p>
       </section>
 
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Datensicherheit</h2>
-        <p className="mt-2">Wir beschränken den Zugriff auf Kunden- und Buchungsdaten auf berechtigte Personen. Passwörter werden als Hash gespeichert. Technische Schutzmassnahmen unterstützen die Sicherheit der Website. Bitte verwende ein eigenes, starkes Passwort und halte deine Zugangsdaten geheim.</p>
+        <p className="mt-2">Wir beschränken den Zugriff auf deine Daten auf berechtigte Personen. Die Formulare werden verschlüsselt übertragen (HTTPS), und technische Schutzmassnahmen wie ein Spam-Schutz unterstützen die Sicherheit der Website.</p>
       </section>
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Illustrationen und künstliche Intelligenz</h2>

@@ -18,9 +18,9 @@ export default function WhyUs() {
           <RevealText
             as="h2"
             text={t(dict.why.title)}
-            className="mt-3 font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
+            className="mt-3 text-balance font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
           />
-          <p className="mt-4 text-ink/55">{t(dict.why.sub)}</p>
+          <p className="mt-4 text-ink/65">{t(dict.why.sub)}</p>
         </div>
 
         <div className="mt-8 grid sm:mt-10 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -37,7 +37,7 @@ export default function WhyUs() {
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-5 font-jakarta text-lg font-bold text-ink">{t(item.title)}</h3>
-              <p className="mt-3 text-base leading-relaxed text-ink/55">{t(item.text)}</p>
+              <p className="mt-3 text-base leading-relaxed text-ink/65">{t(item.text)}</p>
             </motion.div>
           ))}
         </div>

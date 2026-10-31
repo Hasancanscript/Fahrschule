@@ -8,7 +8,7 @@ import { DRIVING_STEPS, DRIVING_RULE_NOTE, DRIVING_SOURCE_URL } from "@/lib/driv
 
 const STEPS = DRIVING_STEPS.map(step => ({
   title: step.title.de, text: step.text.de,
-  href: step.link?.href, linkLabel: step.link?.label.de,
+  links: step.links?.map(link => ({ href: link.href, label: link.label.de })),
 }));
 
 export default function AutoPage() {

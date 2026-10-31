@@ -1,18 +1,14 @@
 "use client";
+import BrandWordmark from "@/components/BrandWordmark";
 import TranslatedContent from "@/components/TranslatedContent";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
-import LogoutIcon from "@/components/LogoutIcon";
 import AutoMenu from "@/components/AutoMenu";
 import NavDropdown from "@/components/NavDropdown";
 import { CartButton } from "@/components/gifts/GiftCartProvider";
 import { useLanguage, useT, dict } from "@/lib/i18n";
-type Session = {
-  user?: { name?: string | null; role?: "CUSTOMER" | "ADMIN" } | null;
-};
-export default function NavbarClient({ session }: { session: Session | null }) {
+export default function NavbarClient() {
   const t = useT(),
     { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false),
@@ -36,63 +32,35 @@ export default function NavbarClient({ session }: { session: Session | null }) {
     window.addEventListener("scroll", scroll, { passive: true });
     return () => window.removeEventListener("scroll", scroll);
   }, []);
-  async function logout() {
-    setOpen(false);
-    await signOut({ redirectTo: "/" });
-  }
   const about = [
     { href: "/#fahrlehrer", label: label("Dein Fahrlehrer", "Ton moniteur") },
     { href: "/#warum", label: t(dict.nav.why) },
     { href: "/ueber-mich", label: label("Über mich", "À propos de moi") },
     { href: "/#bewertungen", label: t(dict.nav.reviews) },
   ];
-  const account = [
-    {
-      href: "/booking",
-      label: label(
-        "Meine Termine und Buchungen",
-        "Mes rendez-vous et réservations",
-      ),
-    },
-    { href: "/booking?view=gifts", label: label("Meine Gutscheine", "Mes bons cadeaux") },
-    ...(session?.user?.role === "ADMIN"
-      ? [{ href: "/admin", label: t(dict.nav.admin) }]
-      : []),
-  ];
-  const logoutButton = (
-    <button
-      type="button"
-      onClick={logout}
-      className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-action-blue px-4 py-2 text-sm font-semibold text-action-blue transition hover:bg-action-blue/5"
-    >
-      <LogoutIcon />
-      {t(dict.nav.logout)}
-    </button>
-  );
   return (
     <TranslatedContent>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-ink/8 bg-surface/95 shadow-sm backdrop-blur-xl" : "border-b border-transparent bg-surface/80 backdrop-blur-md"}`}
       >
-        <div className="flex h-20 w-full items-center justify-between gap-2 px-4 sm:gap-4 sm:px-6 lg:px-10 2xl:px-12">
-          <Link
+        <div className="mx-auto flex h-20 w-full max-w-[2560px] items-center justify-between gap-2 px-6 sm:gap-4 sm:px-8 lg:px-10 2xl:px-12">
+          {/* Normales <a> statt Link, damit ein Klick die Startseite komplett neu lädt */}
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a
             href="/"
             className="flex shrink-0 items-center gap-2 font-jakarta text-sm font-extrabold text-ink sm:gap-2.5 sm:text-lg"
           >
             <span className="relative h-9 w-9 shrink-0 sm:h-10 sm:w-10">
               <Image
-                src="/logo.png?v=20261007"
+                src="/logo.png?v=20261101"
                 alt=""
                 fill
                 sizes="40px"
                 className="object-contain"
               />
             </span>
-            <span className="max-w-[140px] leading-snug sm:max-w-none">
-              Fahrschule{" "}
-              <span className="font-bold text-accent-dark">fürs Leben</span>
-            </span>
-          </Link>
+            <BrandWordmark className="max-w-[150px] sm:max-w-none" />
+          </a>
           <nav
             aria-label="Hauptnavigation"
             className="ml-auto hidden items-center gap-5 whitespace-nowrap text-sm font-medium text-ink/70 xl:flex 2xl:gap-7"
@@ -122,21 +90,6 @@ export default function NavbarClient({ session }: { session: Session | null }) {
               >
                 {lang === "de" ? "FR" : "DE"}
               </button>
-              {session?.user ? (
-                <NavDropdown
-                  label={label("Mein Konto", "Mon compte")}
-                  links={account}
-                >
-                  {logoutButton}
-                </NavDropdown>
-              ) : (
-                <Link
-                  href="/login"
-                  className="flex min-h-11 items-center hover:text-accent-dark"
-                >
-                  {t(dict.nav.login)}
-                </Link>
-              )}
               <Link
                 href="/booking"
                 className="inline-flex min-h-11 items-center rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-hover"
@@ -207,24 +160,6 @@ export default function NavbarClient({ session }: { session: Session | null }) {
                 {label("Kontakt", "Contact")}
               </Link>
               <div className="mt-3 flex flex-col gap-3 border-t border-ink/10 pt-4">
-                {session?.user ? (
-                  <NavDropdown
-                    mobile
-                    label={label("Mein Konto", "Mon compte")}
-                    links={account}
-                    onNavigate={() => setOpen(false)}
-                  >
-                    {logoutButton}
-                  </NavDropdown>
-                ) : (
-                  <Link
-                    href="/login"
-                    onClick={() => setOpen(false)}
-                    className="flex min-h-11 items-center"
-                  >
-                    {t(dict.nav.login)}
-                  </Link>
-                )}
                 <Link
                   href="/booking"
                   onClick={() => setOpen(false)}

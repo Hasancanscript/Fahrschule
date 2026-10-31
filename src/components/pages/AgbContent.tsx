@@ -17,17 +17,16 @@ export default function AgbPage() {
       </section>
 
       <section>
-        <h2 className="font-jakarta text-lg font-bold text-ink">Anmeldung &amp; Buchung</h2>
+        <h2 className="font-jakarta text-lg font-bold text-ink">Anfrage &amp; Buchung</h2>
         <p className="mt-2">
-          Fahrstunden können online im Kundenbereich oder per WhatsApp, Telefon oder E-Mail angefragt werden. Mit der
-          Terminbestätigung gilt die Lektion als verbindlich gebucht.
+          Fahrstunden und Kurse können über das Anfrage-Formular auf der Website oder per WhatsApp, Telefon oder E-Mail angefragt werden. Die Anfrage ist unverbindlich. Mit der Terminbestätigung durch die Fahrschule gilt die Lektion als verbindlich gebucht.
         </p>
       </section>
 
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Absagen &amp; der Joker</h2>
         <p className="mt-2">
-          Fahrstunden können bis 24 Stunden vor Beginn kostenlos abgesagt oder verschoben werden. Im Kundenbereich ist dies bis zu dieser Frist online möglich: Umbuchungen müssen erneut bestätigt werden. Für kurzfristigere Änderungen kontaktiere die Fahrschule direkt. Sagst du
+          Fahrstunden können bis 24 Stunden vor Beginn kostenlos abgesagt oder verschoben werden. Melde dich dafür per WhatsApp, Telefon oder E-Mail bei der Fahrschule. Sagst du
           innerhalb von 24 Stunden vor der Lektion ab, hast du einmalig einen <strong>Joker</strong>: Das erste
           Mal ist es kostenlos und ohne Konsequenzen. Passiert dies ein zweites Mal, wird die Lektion zum
           vollen Preis verrechnet, unabhängig vom Grund der Absage.

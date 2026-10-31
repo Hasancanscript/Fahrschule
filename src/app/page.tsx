@@ -7,6 +7,7 @@ import Instructor from "@/components/Instructor";
 import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
+import TrafficQuiz from "@/components/TrafficQuiz";
 import GiftFeature from "@/components/gifts/GiftFeature";
 import CTA from "@/components/CTA";
 
@@ -23,6 +24,7 @@ export default function Home() {
           <WhyUs />
           <Stats />
           <Testimonials />
+          <TrafficQuiz />
           <FAQ />
           <CTA />
         </div>

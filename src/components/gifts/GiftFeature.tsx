@@ -34,8 +34,8 @@ export default function GiftFeature() {
           </p>
           <p className="mt-3 text-sm leading-relaxed text-ink/65">
             {t(
-              "Persönlich gestalten, Bezahlung vor Ort vereinbaren und nach bestätigter Zahlung als PDF erhalten.",
-              "Personnalise le bon, conviens du paiement sur place et reçois un PDF après confirmation du paiement.",
+              "Persönlich gestalten, Bezahlung mit uns abmachen und den Gutschein nach bestätigter Zahlung erhalten.",
+              "Personnalise le bon, convenons ensemble du paiement et reçois ton bon après confirmation du paiement.",
             )}
           </p>
           <Link

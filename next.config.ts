@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Keine automatisch erzeugte AGENTS.md
+  agentRules: false,
   async headers() {
     return [{ source: "/:path*", headers: [
       { key: "X-Content-Type-Options", value: "nosniff" },
@@ -12,7 +14,7 @@ const nextConfig: NextConfig = {
       ...(process.env.NODE_ENV === "production" ? [{ key: "Strict-Transport-Security", value: "max-age=31536000" }] : []),
     ] }, { source: "/api/:path*", headers: [{ key: "Cache-Control", value: "private, no-store" }] }];
   },
-  images: { minimumCacheTTL: 86400, localPatterns: [{ pathname: "/**", search: "" }, { pathname: "/**", search: "?v=20261007" }] },
+  images: { minimumCacheTTL: 86400, localPatterns: [{ pathname: "/**", search: "" }, { pathname: "/**", search: "?v=20261007" }, { pathname: "/**", search: "?v=20261101" }] },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

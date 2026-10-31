@@ -1,28 +1,22 @@
-"use client";
-import { useEffect, useState } from "react";
+// Preise und Angaben zu den Angeboten. Hier ändern, dann stimmen sie überall auf der Website.
 export type PublicOffer = { id: string; name: string; priceCents: number; discountPercent: number; discountedPriceCents: number; durationMin?: number; lessonsTotal?: number };
+
+const offer = (id: string, name: string, priceCents: number, extra: Partial<PublicOffer> = {}): PublicOffer => ({
+  id,
+  name,
+  priceCents,
+  discountPercent: 0,
+  discountedPriceCents: priceCents,
+  ...extra,
+});
+
+// Der Nothelferkurs hat keinen festen Preis ("Auf Anfrage") und fehlt darum bewusst.
+export const OFFERS: Record<string, PublicOffer> = {
+  single: offer("single", "Fahrstunde", 9200, { durationMin: 45 }),
+  pack5: offer("pack5", "5er-Abo", 42500, { lessonsTotal: 5 }),
+  vku: offer("vku", "VKU", 17000, { durationMin: 180 }),
+};
+
 export function useOffers() {
-  const [offers, setOffers] = useState<Record<string, PublicOffer>>({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    let active = true;
-    let pending = false;
-    const controller = new AbortController();
-    async function refresh() {
-      if (!active || pending) return;
-      pending = true;
-      try {
-        const res = await fetch("/api/public/offers", { cache: "no-store", signal: controller.signal });
-        if (!res.ok) throw new Error("Preisabfrage fehlgeschlagen");
-        const data = await res.json();
-        if (active) setOffers(previous => JSON.stringify(previous) === JSON.stringify(data) ? previous : data);
-      } catch { if (active) setOffers({}); }
-      finally { pending = false; if (active) setLoading(false); }
-    }
-    void refresh();
-    const timer = window.setInterval(() => { if (document.visibilityState === "visible") void refresh(); }, 30000);
-    window.addEventListener("focus", refresh);
-    return () => { active = false; controller.abort(); window.clearInterval(timer); window.removeEventListener("focus", refresh); };
-  }, []);
-  return { offers, loading };
+  return { offers: OFFERS, loading: false };
 }

@@ -133,7 +133,7 @@ export default function Offers() {
             text={t(o.title)}
             className="mt-3 font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
           />
-          <p className="mt-4 text-ink/55">{t(o.sub)}</p>
+          <p className="mt-4 text-ink/65">{t(o.sub)}</p>
         </div>
 
         <div className="mt-8 grid sm:mt-10 gap-6 sm:grid-cols-2 xl:grid-cols-4">

@@ -40,15 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/src/generated/prisma
-.admin-zugang.txt
 
 # Shareable configuration template
 !.env.example
 
-# Local editor settings and server logs
-/.agents/
-/.claude/
-/.windsurf/
+# Server logs
 *.log
-/skills-lock.json

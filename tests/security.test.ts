@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { takeRateLimit, clearRateLimit, mutationRequestError } from "../src/lib/security";
-import { registerSchema, loginSchema, bookingSchema } from "../src/lib/validation";
+import { inquirySchema, inquiryText } from "../src/lib/inquiry";
 
-test("Login limits stop repeated attempts, reset after expiry and stay independent", () => {
-  const key = "test:login";
+test("Rate limits stop repeated attempts, reset after expiry and stay independent", () => {
+  const key = "test:anfrage";
   assert.equal(takeRateLimit(key, 2, 1000, 100), true);
   assert.equal(takeRateLimit(key, 2, 1000, 200), true);
   assert.equal(takeRateLimit(key, 2, 1000, 300), false);
@@ -26,12 +26,13 @@ test("API mutations reject cross-origin, form and oversized requests", () => {
   assert.equal(mutationRequestError(new Request("https://example.test/api/bookings")), null);
 });
 
-test("Account validation normalizes email and limits bcrypt inputs by UTF-8 bytes", () => {
-  const valid = { name: "Test Kunde", email: "  TEST@EXAMPLE.TEST ", password: "a-secure-password" };
-  assert.equal(registerSchema.parse(valid).email, "test@example.test");
-  assert.equal(loginSchema.parse(valid).email, "test@example.test");
-  assert.equal(registerSchema.safeParse({ ...valid, password: "ä".repeat(37) }).success, false);
-  assert.equal(loginSchema.safeParse({ ...valid, password: "a".repeat(73) }).success, false);
-  assert.equal(registerSchema.safeParse({ ...valid, name: "a".repeat(101) }).success, false);
-  assert.equal(bookingSchema.safeParse({ serviceId: "service", slotId: "slot", notes: "a".repeat(4001) }).success, false);
+test("Inquiry form normalizes email, requires consent and blocks header injection", () => {
+  const valid = { offer: "vku", name: "Test Kunde", email: "  TEST@EXAMPLE.TEST ", phone: "+41 78 000 00 00", preferredTimes: "Samstag", message: "", lang: "de", accepted: true };
+  assert.equal(inquirySchema.parse(valid).email, "test@example.test");
+  assert.equal(inquirySchema.safeParse({ ...valid, accepted: false }).success, false);
+  assert.equal(inquirySchema.safeParse({ ...valid, offer: "admin" }).success, false);
+  assert.equal(inquirySchema.safeParse({ ...valid, name: "Test\nBcc: x@example.test" }).success, false);
+  assert.equal(inquirySchema.safeParse({ ...valid, phone: "abc" }).success, false);
+  assert.equal(inquirySchema.safeParse({ ...valid, message: "a".repeat(2001) }).success, false);
+  assert.match(inquiryText(inquirySchema.parse(valid)), /VKU/);
 });

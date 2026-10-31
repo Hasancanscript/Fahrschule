@@ -59,8 +59,8 @@ export default function CTA() {
     },
     {
       icon: <CalendarIcon />,
-      label: t(d.ctaBook),
-      value: t(d.areaValue),
+      label: t({ de: "Online anfragen", fr: "Demander en ligne" }),
+      value: t({ de: "Freien Termin wählen", fr: "Choisir un créneau libre" }),
       href: "/booking",
     },
   ];
@@ -68,14 +68,14 @@ export default function CTA() {
   return <TranslatedContent>{(
     <section id="kontakt" className="relative overflow-hidden bg-surface py-12 sm:py-16 lg:py-20">
       <div className="site-container">
-        <div className="mx-auto max-w-xl text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <span className="text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-tight tracking-tight text-accent-dark">{t(d.eyebrow)}</span>
           <RevealText
             as="h2"
             text={t(d.title)}
-            className="mt-3 font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
+            className="mt-3 text-balance font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
           />
-          <p className="mx-auto mt-5 max-w-md text-ink/55">{t(d.sub)}</p>
+          <p className="mx-auto mt-5 max-w-md text-ink/65">{t(d.sub)}</p>
         </div>
 
         <div className="mt-8 grid sm:mt-10 gap-4 sm:grid-cols-3">
@@ -95,7 +95,7 @@ export default function CTA() {
                 {m.icon}
               </span>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-ink/40">{m.label}</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-ink/65">{m.label}</p>
                 <p className="mt-0.5 font-jakarta text-base font-bold text-ink">{m.value}</p>
               </div>
             </motion.a>
@@ -107,9 +107,9 @@ export default function CTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="relative mt-6 h-[380px] overflow-hidden rounded-3xl shadow-sm sm:h-[420px]"
+          className="relative mt-6 h-[460px] overflow-hidden rounded-3xl shadow-sm sm:h-[420px]"
         >
-          {mapsAllowed ? <iframe src={MAP_EMBED_SRC} className="absolute inset-0 h-full w-full" style={{ border: 0 }} loading="lazy" referrerPolicy="no-referrer" title="Google Maps: Fahrschule fürs Leben in Biel/Bienne" /> : <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-accent-soft px-6 pb-28 text-center"><p className="max-w-md text-sm text-ink/75">Die Google-Maps-Karte wird erst mit deiner Zustimmung geladen. Die Adresse findest du unten auch ohne Karte.</p><button type="button" onClick={allowMaps} className="min-h-11 rounded-xl bg-action-green px-5 py-3 text-sm font-bold text-white">Google Maps erlauben und laden</button></div>}
+          {mapsAllowed ? <iframe src={MAP_EMBED_SRC} className="absolute inset-0 h-full w-full" style={{ border: 0 }} loading="lazy" referrerPolicy="no-referrer" title="Google Maps: Fahrschule fürs Leben in Biel/Bienne" /> : <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-accent-soft px-6 pb-44 text-center sm:pb-28"><p className="max-w-md text-sm text-ink/75">Die Google-Maps-Karte wird erst mit deiner Zustimmung geladen. Die Adresse findest du unten auch ohne Karte.</p><button type="button" onClick={allowMaps} className="min-h-11 rounded-xl bg-action-green px-5 py-3 text-sm font-bold text-white">Google Maps erlauben und laden</button></div>}
 
           <div className={`pointer-events-none absolute inset-0 ${mapsAllowed ? "bg-gradient-to-t from-ink/50 via-transparent to-transparent" : ""}`} />
 

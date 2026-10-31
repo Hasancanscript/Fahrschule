@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/lib/i18n";
@@ -9,7 +9,7 @@ import {
   PRESETS,
   money,
   validGiftAmount,
-  type GiftSettings,
+  GIFT_SETTINGS,
 } from "@/lib/gift-shared";
 import { useGiftCart } from "./GiftCartProvider";
 import { OfflineNotice, GIFT_BUTTON } from "./GiftCommon";
@@ -17,34 +17,17 @@ import { OfflineNotice, GIFT_BUTTON } from "./GiftCommon";
 export default function GiftShop() {
   const { lang } = useLanguage(),
     cart = useGiftCart();
-  const [settings, setSettings] = useState<GiftSettings | null>(null);
-  const [error, setError] = useState(false),
-    [custom, setCustom] = useState(10000);
+  // Mindest- und Höchstbetrag: GIFT_SETTINGS in src/lib/gift-shared.ts
+  const settings = GIFT_SETTINGS;
+  const [custom, setCustom] = useState(10000);
   const [notice, setNotice] = useState<{
     amount: number;
     added: boolean;
   } | null>(null);
   const t = (de: string, fr: string) => giftText(lang, de, fr);
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch("/api/gifts/settings", { signal: controller.signal })
-      .then(async (r) => {
-        if (!r.ok) throw Error();
-        const s = await r.json();
-        setSettings(s);
-        const first = Math.ceil(s.minCents / 5000) * 5000;
-        const last = Math.floor(s.maxCents / 5000) * 5000;
-        setCustom(Math.min(Math.max(10000, first), last));
-      })
-      .catch(() => {
-        if (!controller.signal.aborted) setError(true);
-      });
-    return () => controller.abort();
-  }, []);
-  const first = settings ? Math.ceil(settings.minCents / 5000) * 5000 : 5000;
-  const last = settings ? Math.floor(settings.maxCents / 5000) * 5000 : 100000;
-  const validCustom =
-    settings && first <= last && validGiftAmount(custom, settings);
+  const first = Math.ceil(settings.minCents / 5000) * 5000;
+  const last = Math.floor(settings.maxCents / 5000) * 5000;
+  const validCustom = first <= last && validGiftAmount(custom, settings);
   const price = (amount: number) =>
     `CHF ${(amount / 100).toLocaleString(lang === "fr" ? "fr-CH" : "de-CH")}`;
   const descriptions = [
@@ -83,8 +66,8 @@ export default function GiftShop() {
     [
       t("Bestellung absenden", "Envoyer la commande"),
       t(
-        "Sende deine Bestellung ab. Wir kontaktieren dich anschliessend, um die Bezahlung vor Ort in bar oder mit TWINT zu vereinbaren.",
-        "Envoie ta commande. Nous te contacterons ensuite pour convenir du paiement sur place, en espèces ou avec TWINT.",
+        "Sende deine Bestellung ab. Wir melden uns anschliessend bei dir und machen die Bezahlung in bar oder mit TWINT ab.",
+        "Envoie ta commande. Nous te contactons ensuite pour convenir du paiement en espèces ou avec TWINT.",
       ),
     ],
     [
@@ -157,8 +140,8 @@ export default function GiftShop() {
           </ul>
           <p className="mt-5 border-t border-ink/10 pt-4 text-sm leading-relaxed text-ink/70">
             {t(
-              "Bezahlung persönlich vor Ort: Barzahlung oder TWINT. Dein Gutschein wird erst nach bestätigter Bezahlung aktiviert.",
-              "Paiement en personne sur place: en espèces ou avec TWINT. Ton bon est activé uniquement après confirmation du paiement.",
+              "Bezahlung nach Absprache: bar oder mit TWINT. Dein Gutschein wird erst nach bestätigter Bezahlung aktiviert.",
+              "Paiement après accord : en espèces ou avec TWINT. Ton bon est activé uniquement après confirmation du paiement.",
             )}
           </p>
         </aside>
@@ -183,14 +166,6 @@ export default function GiftShop() {
             "Choisis un bon. Tu ajouteras le bénéficiaire et ton message à l’étape suivante. Aucun compte n’est nécessaire.",
           )}
         </p>
-        {error && (
-          <p role="alert" className="mt-4 text-sm text-red-800">
-            {t(
-              "Wunschbeträge konnten nicht geladen werden. Bitte lade die Seite erneut.",
-              "Les montants personnalisés n’ont pas pu être chargés. Recharge la page.",
-            )}
-          </p>
-        )}
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {[...PRESETS, null].map((amount, index) => (
             <article
@@ -211,7 +186,7 @@ export default function GiftShop() {
                 />
               </div>
               <div className="flex flex-1 flex-col p-5 sm:p-6">
-                <p className="text-xs font-bold uppercase tracking-wider text-ink/55">
+                <p className="text-xs font-bold uppercase tracking-wider text-ink/65">
                   {t("Geschenkgutschein", "Bon cadeau")}
                 </p>
                 <h3 className="mt-2 text-2xl font-extrabold">

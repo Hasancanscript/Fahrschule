@@ -30,8 +30,6 @@ const TOPICS = [
 export default function NothelferkursPage() {
   return <TranslatedContent>{(
     <CourseInfoPage
-      apiBase="/api/nothelferkurs"
-      loginNext="/nothelferkurs"
       imageSrc="/erste-hilfe-kurs-mit-reanimationstraining.png"
       imageAlt="Erste-Hilfe-Kurs mit Reanimationstraining"
       eyebrow="Angebote · Nothelferkurs"
@@ -40,8 +38,8 @@ export default function NothelferkursPage() {
       topics={TOPICS}
       duration="Tageskurs"
       offerKey="firstaid"
-      sectionEyebrow="Verfügbare Termine"
-      sectionTitle="Wähle deinen Nothelferkurs-Termin"
+      sectionEyebrow="Termin anfragen"
+      sectionTitle="Frag deinen Nothelferkurs-Termin an"
     />
   )}</TranslatedContent>;
 }

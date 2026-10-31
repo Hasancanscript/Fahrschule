@@ -21,23 +21,16 @@ const GROUPS = [
     ],
   },
   {
-    title: "Kurse & Buchung",
+    title: "Kurse & Anfrage",
     links: [
       { href: "/auto", label: "Auto · Schritt für Schritt" },
       { href: "/fahrstunde", label: "Fahrstunde" },
       { href: "/5er-abo", label: "5er-Abo" },
       { href: "/vku", label: "VKU-Kurstermine" },
       { href: "/nothelferkurs", label: "Nothelferkurs" },
-      { href: "/booking", label: "Meine Termine buchen" },
+      { href: "/booking", label: "Termin anfragen" },
       { href: "/gutscheine", label: "Gutscheine" },
       { href: "/warenkorb", label: "Warenkorb" },
-    ],
-  },
-  {
-    title: "Konto",
-    links: [
-      { href: "/login", label: "Anmelden" },
-      { href: "/register", label: "Registrieren" },
     ],
   },
   {

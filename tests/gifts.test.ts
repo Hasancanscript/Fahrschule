@@ -32,7 +32,6 @@ test("fixed amounts and configurable custom ranges are checked in integer cents"
 });
 test("checkout never accepts online payments, invalid recipients or unacknowledged terms", () => {
   const body = {
-    requestId: crypto.randomUUID(),
     firstName: "Test",
     lastName: "Name",
     email: "EXAMPLE@example.invalid",

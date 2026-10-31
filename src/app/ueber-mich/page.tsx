@@ -164,7 +164,7 @@ export default function UeberMichPage() {
                 href="/booking"
                 className="inline-block rounded-full bg-accent px-8 py-3.5 font-semibold text-white shadow-lg shadow-accent/30 transition hover:-translate-y-0.5 hover:bg-accent-hover hover:text-white"
               >
-                Fahrstunde buchen →
+                Fahrstunde anfragen →
               </a>
             </motion.div>
           </div>

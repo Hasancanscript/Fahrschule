@@ -7,7 +7,7 @@ import GiftPrivacy from "@/components/gifts/GiftPrivacy"; import LegalLayout fro
 
 export default function CookiesPage() {
   return <TranslatedContent>{(
-    <LegalLayout title="Cookie-Richtlinie" updated="7. Oktober 2026">
+    <LegalLayout title="Cookie-Richtlinie" updated="31. Oktober 2026">
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Was sind Cookies?</h2>
         <p className="mt-2">
@@ -20,18 +20,17 @@ export default function CookiesPage() {
         <h2 className="font-jakarta text-lg font-bold text-ink">Welche Cookies wir verwenden</h2>
         <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5">
           <li>
-            <strong>Notwendige Cookies:</strong> Anmelde- und Sicherheitscookies sorgen dafür, dass du nach dem Anmelden
-            eingeloggt bleibst und deine Buchungen verwalten kannst. Sie schützen den Anmeldevorgang
-            vor gefälschten Anfragen und merken die Rückkehradresse nach der Anmeldung.
-            Ohne die erforderlichen Cookies funktioniert der geschützte Buchungsbereich nicht.
+            <strong>Notwendige Cookies:</strong> Diese Website setzt selbst keine Anmelde- oder Sitzungscookies, denn es gibt kein Kundenkonto mehr. Anfragen und Gutscheinbestellungen funktionieren ohne Cookies.
           </li>
           <li>
-            <strong>Lokale Speicherung (kein Cookie):</strong> Deine Auswahl zu Google Maps und deine Spracheinstellung (Deutsch/Französisch)
-            werden im lokalen Speicher deines Browsers gemerkt, nicht als Cookie.
+            <strong>Lokale Speicherung (kein Cookie):</strong> Deine Auswahl zu Google Maps, deine Spracheinstellung (Deutsch/Französisch) und dein Gutschein-Warenkorb werden im lokalen Speicher deines Browsers gemerkt, nicht als Cookie.
           </li>
           <li>
             <strong>Drittanbieter:</strong> Die Google-Maps-Karte wird nur nach deiner Zustimmung geladen und kann dann eigene Cookies
             von Google setzen.
+          </li>
+          <li>
+            <strong>Drittanbieter:</strong> Die VKU-Kursübersicht (SARI VKU/PGS der asa) setzt beim Laden ein technisch notwendiges Sitzungscookie für die Kursanmeldung.
           </li>
         </ul>
       </section>
@@ -50,9 +49,7 @@ export default function CookiesPage() {
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Cookies verwalten</h2>
         <p className="mt-2">
-          Du kannst deine Auswahl jederzeit über „Cookie-Einstellungen“ im Footer ändern. Wenn du Google Maps deaktivierst, wird die Karte entfernt und keine neue Verbindung von dieser Website zu Google aufgebaut. Bereits von Google gesetzte Cookies löschst du über deine Browsereinstellungen. Dort kannst du auch weitere Cookies einsehen, blockieren oder löschen.
-          Bitte beachte, dass das Blockieren notwendiger Cookies dazu führen kann, dass du dich nicht anmelden
-          oder Termine buchen kannst.
+          Du kannst deine Auswahl jederzeit über „Cookie-Einstellungen“ im Footer ändern. Wenn du Google Maps deaktivierst, wird die Karte entfernt und keine neue Verbindung von dieser Website zu Google aufgebaut. Bereits von Google gesetzte Cookies löschst du über deine Browsereinstellungen. Dort kannst du auch weitere Cookies und lokale Daten einsehen, blockieren oder löschen.
         </p>
       </section>
 

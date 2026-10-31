@@ -16,8 +16,8 @@ export default function GiftTerms() {
         </h2>
         <p className="mt-2">
           {t(
-            "Die Online-Anfrage ist unverbindlich. Die Zahlungsvereinbarung und der Kauf erfolgen anschliessend persönlich mit Fahrschule fürs Leben, Hüseyin Katranbayiri, Aegertenstrasse 28, 2503 Biel/Bienne. Zahlungen werden ausschliesslich vor Ort in bar oder mit TWINT entgegengenommen. Ein Gutschein ist erst nach tatsächlichem Zahlungseingang und bestätigter Aktivierung gültig.",
-            "La demande en ligne est sans engagement. L’accord de paiement et l’achat interviennent ensuite personnellement auprès de Fahrschule fürs Leben, Hüseyin Katranbayiri, Aegertenstrasse 28, 2503 Biel/Bienne. Les paiements sont acceptés uniquement sur place en espèces ou avec TWINT. Un bon n’est valable qu’après réception effective du paiement et confirmation de son activation.",
+            "Die Online-Anfrage ist unverbindlich. Die Zahlungsvereinbarung und der Kauf erfolgen anschliessend direkt mit Fahrschule fürs Leben, Hüseyin Katranbayiri, Aegertenstrasse 28, 2503 Biel/Bienne. Zahlungen werden ausschliesslich in bar oder mit TWINT entgegengenommen, nach Absprache mit der Fahrschule. Ein Gutschein ist erst nach tatsächlichem Zahlungseingang und bestätigter Aktivierung gültig.",
+            "La demande en ligne est sans engagement. L’accord de paiement et l’achat interviennent ensuite directement avec Fahrschule fürs Leben, Hüseyin Katranbayiri, Aegertenstrasse 28, 2503 Biel/Bienne. Les paiements sont acceptés uniquement en espèces ou avec TWINT, après accord avec l’auto-école. Un bon n’est valable qu’après réception effective du paiement et confirmation de son activation.",
           )}
         </p>
       </section>

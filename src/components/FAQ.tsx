@@ -22,7 +22,7 @@ export default function FAQ() {
             text={t(dict.faq.title)}
             className="mt-3 font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
           />
-          <p className="mt-4 text-ink/55">{t(dict.faq.sub)}</p>
+          <p className="mt-4 text-ink/65">{t(dict.faq.sub)}</p>
         </div>
 
         <div className="mt-8 flex sm:mt-10 flex-col gap-3">
@@ -48,7 +48,7 @@ export default function FAQ() {
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.25 }}
                     className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-lg ${
-                      isOpen ? "bg-accent text-white" : "bg-surface-2 text-ink/50"
+                      isOpen ? "bg-accent text-white" : "bg-surface-2 text-ink/65"
                     }`}
                   >
                     +

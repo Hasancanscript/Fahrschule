@@ -100,7 +100,7 @@ export default function RouteGraphic() {
         transition={{ delay: 0.8, duration: 0.5 }}
         className="absolute left-[2%] top-[76%] rounded-2xl border border-ink/8 bg-card px-4 py-3 shadow-md"
       >
-        <p className="text-xs font-semibold text-ink/50">★★★★★ 4.9</p>
+        <p className="text-xs font-semibold text-ink/65">★★★★★ 4.9</p>
         <p className="text-sm font-bold text-ink">400+ Fahrschüler:innen</p>
       </motion.div>
 
@@ -111,7 +111,7 @@ export default function RouteGraphic() {
         className="absolute right-[4%] top-[6%] rounded-2xl border border-ink/8 bg-card px-4 py-3 shadow-md"
       >
         <p className="text-sm font-bold text-ink">🎓 Führerausweis</p>
-        <p className="text-xs text-ink/50">Dein Ziel</p>
+        <p className="text-xs text-ink/65">Dein Ziel</p>
       </motion.div>
     </motion.div>
   )}</TranslatedContent>;

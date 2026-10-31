@@ -20,12 +20,12 @@ export default function Testimonials() {
   return <TranslatedContent>{(
     <section id="bewertungen" className="relative bg-surface-2 py-12 sm:py-16 lg:py-20">
       <div className="site-container">
-        <div className="mx-auto max-w-xl text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <span className="text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-tight tracking-tight text-accent-dark">{t(dict.reviews.eyebrow)}</span>
           <RevealText
             as="h2"
             text={t(dict.reviews.title)}
-            className="mt-3 font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
+            className="mt-3 text-balance font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
           />
         </div>
 

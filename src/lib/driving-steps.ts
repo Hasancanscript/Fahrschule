@@ -1,5 +1,5 @@
 type LocalizedText = { de: string; fr: string };
-export type DrivingStep = { title: LocalizedText; text: LocalizedText; banner?: LocalizedText; link?: { href: string; label: LocalizedText } };
+export type DrivingStep = { title: LocalizedText; text: LocalizedText; banner?: LocalizedText; links?: readonly { href: string; label: LocalizedText }[] };
 
 // Same verified sequence for the home timeline and the Auto information page.
 export const DRIVING_STEPS: readonly DrivingStep[] = [
@@ -11,7 +11,16 @@ export const DRIVING_STEPS: readonly DrivingStep[] = [
     "text": {
       "de": "Lass deinen Sehtest bei einer berechtigten Fachperson machen und bereite ein Passfoto sowie die verlangten Unterlagen vor. Der Sehtest darf bei der Gesuchseinreichung höchstens 24 Monate alt sein.",
       "fr": "Fais contrôler ta vue auprès d’une personne habilitée et prépare une photo ainsi que les documents demandés. Le test de vue doit dater de moins de 24 mois au dépôt de la demande."
-    }
+    },
+    "links": [
+      {
+        "href": "https://www.svsa.sid.be.ch/de/start/lernfahrer/lernfahrausweis/",
+        "label": {
+          "de": "Welche Unterlagen du brauchst",
+          "fr": "Les documents dont tu as besoin"
+        }
+      }
+    ]
   },
   {
     "title": {
@@ -22,13 +31,15 @@ export const DRIVING_STEPS: readonly DrivingStep[] = [
       "de": "Lerne Erste Hilfe für den Strassenverkehr. Beim erstmaligen Erwerb der Kategorie B brauchst du grundsätzlich den Kursnachweis für dein Gesuch.",
       "fr": "Apprends les gestes de premiers secours. Pour un premier permis de catégorie B, l’attestation est en principe nécessaire pour ta demande."
     },
-    "link": {
-      "href": "/nothelferkurs",
-      "label": {
-        "de": "Zum Nothelferkurs",
-        "fr": "Vers le cours de premiers secours"
+    "links": [
+      {
+        "href": "/nothelferkurs",
+        "label": {
+          "de": "Zum Nothelferkurs",
+          "fr": "Vers le cours de premiers secours"
+        }
       }
-    }
+    ]
   },
   {
     "title": {
@@ -39,13 +50,15 @@ export const DRIVING_STEPS: readonly DrivingStep[] = [
       "de": "Fülle das Gesuch des Kantons Bern aus. Beim ersten Gesuch ist die persönliche Einreichung zur Identitätsprüfung erforderlich: etwa bei der Gemeinde, Polizei oder dem SVSA.",
       "fr": "Remplis le formulaire du canton de Berne. La première demande doit être déposée personnellement pour vérifier ton identité, par exemple à la commune, à la police ou à l’OVN."
     },
-    "link": {
-      "href": "https://www.svsa.sid.be.ch/de/start/lernfahrer/lernfahrausweis/",
-      "label": {
-        "de": "Gesuch und Unterlagen beim Kanton Bern",
-        "fr": "Demande et documents du canton de Berne"
+    "links": [
+      {
+        "href": "https://www.edocinternet.apps.be.ch/edocinternet/de/edoc",
+        "label": {
+          "de": "Gesuch online ausfüllen",
+          "fr": "Remplir la demande en ligne"
+        }
       }
-    }
+    ]
   },
   {
     "title": {
@@ -80,13 +93,15 @@ export const DRIVING_STEPS: readonly DrivingStep[] = [
       "de": "Jetzt geht es ans praktische Lernen: vom Kennenlernen des Fahrzeugs bis zum selbstständigen Fahren. Wir stimmen die Lektionen auf deinen Lernstand ab.",
       "fr": "Place à la pratique: découvrir le véhicule et apprendre à conduire de manière autonome. Les leçons sont adaptées à ton niveau."
     },
-    "link": {
-      "href": "/fahrstunde",
-      "label": {
-        "de": "Fahrstunden kennenlernen",
-        "fr": "Découvrir les leçons de conduite"
+    "links": [
+      {
+        "href": "/fahrstunde",
+        "label": {
+          "de": "Fahrstunden kennenlernen",
+          "fr": "Découvrir les leçons de conduite"
+        }
       }
-    }
+    ]
   },
   {
     "title": {
@@ -97,13 +112,15 @@ export const DRIVING_STEPS: readonly DrivingStep[] = [
       "de": "Im Verkehrskundeunterricht vertiefst du dein Verständnis für sicheres Fahren. Bis Ende 2026 gehört er zur Vorbereitung auf die praktische Prüfung: ab 2027 grundsätzlich vor die Theorieprüfung.",
       "fr": "Le cours de sensibilisation approfondit ta compréhension de la sécurité routière. Jusqu’à fin 2026, il prépare à l’examen pratique: dès 2027, il précède en principe la théorie."
     },
-    "link": {
-      "href": "/vku",
-      "label": {
-        "de": "Zum VKU",
-        "fr": "Vers l’ECR"
+    "links": [
+      {
+        "href": "/vku",
+        "label": {
+          "de": "Zum VKU",
+          "fr": "Vers l’ECR"
+        }
       }
-    },
+    ],
     "banner": {
       "de": "Ab 2027: vor der Theorie",
       "fr": "Dès 2027: avant la théorie"
@@ -128,13 +145,15 @@ export const DRIVING_STEPS: readonly DrivingStep[] = [
       "de": "Nach bestandener Prüfung beginnt die dreijährige Probezeit. Besuche den obligatorischen Weiterausbildungskurs innerhalb der ersten zwölf Monate.",
       "fr": "Après l’examen commence une période d’essai de trois ans. Suis la formation complémentaire obligatoire dans les douze premiers mois."
     },
-    "link": {
-      "href": "https://www.svsa.sid.be.ch/de/start/fuehrerausweise/rund-um-fuehrerausweis/fuehrerausweis-auf-probe.html",
-      "label": {
-        "de": "Informationen zur Probezeit und WAB",
-        "fr": "Informations sur la période d’essai et la formation complémentaire"
+    "links": [
+      {
+        "href": "https://www.svsa.sid.be.ch/de/start/fuehrerausweise/rund-um-fuehrerausweis/fuehrerausweis-auf-probe.html",
+        "label": {
+          "de": "Informationen zur Probezeit und WAB",
+          "fr": "Informations sur la période d’essai et la formation complémentaire"
+        }
       }
-    }
+    ]
   }
 ];
 

@@ -26,9 +26,7 @@ export default function BarrierefreiheitPage() {
       <section>
         <h2 className="font-jakarta text-lg font-bold text-ink">Bekannte Einschränkungen</h2>
         <p className="mt-2">
-          Einzelne eingebettete Inhalte Dritter (z. B. die Google-Maps-Karte) liegen ausserhalb unseres
-          direkten Einflusses und werden nur auf Wunsch geladen. Die herunterladbaren Buchungs-PDFs haben noch keine vollständige Strukturierung für Screenreader: dieselben Buchungsangaben sind als HTML im Kundenbereich verfügbar. Eine vollständige WCAG-Konformität wurde nicht unabhängig zertifiziert. Wir arbeiten
-          laufend daran, die Zugänglichkeit der Website zu verbessern.
+          Einzelne eingebettete Inhalte Dritter (z. B. die Google-Maps-Karte) liegen ausserhalb unseres direkten Einflusses und werden nur auf Wunsch geladen. Eine vollständige WCAG-Konformität wurde nicht unabhängig zertifiziert. Wir arbeiten laufend daran, die Zugänglichkeit der Website zu verbessern.
         </p>
       </section>
 

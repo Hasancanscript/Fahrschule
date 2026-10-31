@@ -14,15 +14,15 @@ export function OfflineNotice() {
       <p className="font-bold">
         {giftText(
           lang,
-          "Bezahlung persönlich vor Ort",
-          "Paiement en personne sur place",
+          "Bezahlung nach Absprache",
+          "Paiement après accord",
         )}
       </p>
       <p className="mt-2">
         {giftText(
           lang,
-          "Die Bezahlung erfolgt persönlich beim Fahrlehrer in bar oder mit TWINT. Nach bestätigter Bezahlung wird dein Gutschein aktiviert und ausgestellt.",
-          "Le paiement s’effectue en personne auprès du moniteur, en espèces ou avec TWINT. Après confirmation du paiement, ton bon est activé et établi.",
+          "Wir melden uns nach deiner Bestellung und machen die Bezahlung mit dir ab, in bar oder mit TWINT. Nach bestätigter Bezahlung wird dein Gutschein aktiviert und ausgestellt.",
+          "Nous te contactons après ta commande pour convenir du paiement, en espèces ou avec TWINT. Après confirmation du paiement, ton bon est activé et établi.",
         )}
       </p>
     </aside>

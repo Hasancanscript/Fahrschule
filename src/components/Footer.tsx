@@ -1,4 +1,5 @@
 "use client";
+import BrandWordmark from "@/components/BrandWordmark";
 import TranslatedContent from "@/components/TranslatedContent";
 
 import { CookieSettingsButton } from "@/components/CookieConsent";
@@ -57,25 +58,22 @@ export default function Footer() {
               <div className="flex items-center gap-2.5 font-jakarta text-lg font-extrabold">
                 <span className="relative h-9 w-9 shrink-0">
                   <Image
-                    src="/logo.png?v=20261007"
+                    src="/logo.png?v=20261101"
                     alt=""
                     fill
                     sizes="36px"
                     className="object-contain"
                   />
                 </span>
-                <span>
-                  Fahrschule{" "}
-                  <span className="font-bold text-accent-dark">fürs Leben</span>
-                </span>
+                <BrandWordmark />
               </div>
-              <p className="mt-3 max-w-xs text-sm text-ink/50">
+              <p className="mt-3 max-w-xs text-sm text-ink/65">
                 {t(dict.footer.tagline)}
               </p>
             </div>
 
             <div>
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-ink/40">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-ink/65">
                 {t(dict.footer.nav)}
               </h2>
               <nav className="mt-3 flex flex-col gap-2 text-sm text-ink/60">
@@ -119,7 +117,7 @@ export default function Footer() {
             </div>
 
             <div id="kontakt" className="scroll-mt-28">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-ink/40">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-ink/65">
                 {t(dict.footer.contact)}
               </h2>
               <div className="mt-3 flex flex-col gap-2 text-sm text-ink/60">
@@ -148,7 +146,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-ink/40">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-ink/65">
                 Rechtliches
               </h2>
               <nav className="mt-3 flex flex-col gap-2 text-sm text-ink/60">
@@ -206,7 +204,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 text-ink/50 transition hover:border-accent/40 hover:text-accent-dark"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 text-ink/65 transition hover:border-accent/40 hover:text-accent-dark"
                 >
                   <WhatsAppIcon />
                 </a>
@@ -215,7 +213,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 text-ink/50 transition hover:border-accent/40 hover:text-accent-dark"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 text-ink/65 transition hover:border-accent/40 hover:text-accent-dark"
                 >
                   <InstagramIcon />
                 </a>
@@ -224,7 +222,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="TikTok"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 text-ink/50 transition hover:border-accent/40 hover:text-accent-dark"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 text-ink/65 transition hover:border-accent/40 hover:text-accent-dark"
                 >
                   <TiktokIcon />
                 </a>
@@ -232,9 +230,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="border-t border-ink/8 pt-6 pb-28">
-            <div className="site-container flex flex-wrap items-center justify-center gap-x-6 gap-y-4 text-xs text-ink/60 sm:justify-between">
-              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          <div className="border-t border-ink/8 py-6">
+            <div className="site-container flex flex-wrap items-center justify-start gap-x-6 gap-y-4 text-xs text-ink/60 sm:justify-between">
+              <div className="flex flex-wrap items-center justify-start gap-x-5 gap-y-2">
                 <p>© Fahrschule fürs Leben. {t(dict.footer.rights)}</p>
                 <p>
                   Webdesign bei{" "}

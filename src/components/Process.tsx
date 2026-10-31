@@ -15,7 +15,7 @@ type Step = {
   title: Translatable;
   text: Translatable;
   banner?: Translatable;
-  link?: { href: string; label: Translatable };
+  links?: readonly { href: string; label: Translatable }[];
 };
 
 function GlowBox({ children }: { children: React.ReactNode }) {
@@ -94,14 +94,14 @@ export default function Process() {
   return <TranslatedContent>{(
     <section id="ablauf" className="relative bg-surface py-12 sm:py-16 lg:py-20">
       <div className="site-container">
-        <div className="mx-auto max-w-xl text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <span className="text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-tight tracking-tight text-accent-dark">{t(dict.process.eyebrow)}</span>
           <RevealText
             as="h2"
             text={t(dict.process.title)}
-            className="mt-3 font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
+            className="mt-3 text-balance font-jakarta text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink"
           />
-          <p className="mt-4 text-ink/55">{t(dict.process.sub)}</p>
+          <p className="mt-4 text-ink/65">{t(dict.process.sub)}</p>
         </div>
 
         <aside className="mt-8 rounded-2xl border border-accent/20 bg-accent-soft p-5 sm:p-6">
@@ -129,7 +129,6 @@ export default function Process() {
 
           {steps.map((step, i) => {
             const isLast = i === total - 1;
-            const isExternal = step.link?.href.startsWith("http");
 
             const cardInner = (
               <>
@@ -142,16 +141,24 @@ export default function Process() {
                     </GlowBox>
                   )}
                 </div>
-                <p className="mt-1.5 text-sm text-ink/55">{t(step.text)}</p>
-                {step.link && (
-                  <a
-                    href={step.link.href}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noopener noreferrer" : undefined}
-                    className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent-dark transition hover:underline"
-                  >
-                    {t(step.link.label)} →
-                  </a>
+                <p className="mt-1.5 text-sm text-ink/65">{t(step.text)}</p>
+                {step.links && (
+                  <div className="mt-3 flex flex-col items-start gap-1.5">
+                    {step.links.map((link) => {
+                      const isExternal = link.href.startsWith("http");
+                      return (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          target={isExternal ? "_blank" : undefined}
+                          rel={isExternal ? "noopener noreferrer" : undefined}
+                          className="inline-flex items-center gap-1 text-sm font-semibold text-accent-dark transition hover:underline"
+                        >
+                          {t(link.label)} →
+                        </a>
+                      );
+                    })}
+                  </div>
                 )}
               </>
             );
@@ -194,7 +201,7 @@ export default function Process() {
             href="/booking"
             className="rounded-full bg-accent px-8 py-3.5 font-semibold text-white shadow-md shadow-accent/30 transition hover:-translate-y-0.5 hover:bg-accent-hover hover:text-white hover:shadow-lg"
           >
-            {t(dict.process.ctaBook)} →
+            {t(dict.process.ctaBook)}{" "}→
           </Link>
         </motion.div>
       </div>

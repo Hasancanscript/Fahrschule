@@ -21,7 +21,6 @@ const name = z
   .max(100)
   .regex(/^[^\u0000-\u001f\u007f]+$/);
 export const orderSchema = z.object({
-  requestId: z.string().uuid(),
   firstName: name,
   lastName: name,
   email: z.string().trim().toLowerCase().email().max(254),
@@ -45,7 +44,12 @@ export const orderSchema = z.object({
     )
     .min(1)
     .max(MAX_GIFTS),
+  // Für Menschen unsichtbares Feld gegen Spam-Programme
+  website: z.string().max(200).optional(),
 });
+export type GiftOrderInput = z.infer<typeof orderSchema>;
+// Mindest- und Höchstbetrag für den Wunschbetrag
+export const GIFT_SETTINGS: GiftSettings = { minCents: 5000, maxCents: 100000 };
 export function validGiftAmount(cents: number, settings: GiftSettings) {
   return (
     Number.isSafeInteger(cents) &&
@@ -83,52 +87,3 @@ export function restoreCart(raw: string | null): GiftItem[] {
 export function methodLabel(method: string, lang: string) {
   return method === "TWINT" ? "TWINT" : giftText(lang, "Barzahlung", "Espèces");
 }
-export function statusLabel(status: string, lang: string) {
-  const labels: Record<string, [string, string]> = {
-    OPEN: ["Zahlung ausstehend", "Paiement en attente"],
-    PAID: ["Bezahlt", "Payé"],
-    CANCELLED: ["Storniert", "Annulé"],
-    INACTIVE: ["Noch nicht gültig", "Pas encore valable"],
-    ACTIVE: ["Aktiv", "Actif"],
-    REDEEMED: ["Vollständig eingelöst", "Entièrement utilisé"],
-    PENDING: ["Versand ausstehend", "Envoi en attente"],
-    SENDING: ["Wird versendet", "En cours d’envoi"],
-    SENT: ["Versendet", "Envoyé"],
-    FAILED: ["Versand fehlgeschlagen", "Échec de l’envoi"],
-  };
-  return labels[status]?.[lang === "fr" ? 1 : 0] ?? status;
-}
-export type GiftVoucherRow = GiftItem & {
-  code: string;
-  remainingCents: number;
-  status: string;
-  activatedAt: string | null;
-  redemptions: {
-    id: string;
-    amountCents: number;
-    reference: string;
-    createdAt: string;
-  }[];
-};
-export type GiftOrderRow = {
-  id: string;
-  number: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  totalCents: number;
-  status: string;
-  requestedMethod: string;
-  paidMethod: string | null;
-  paidAt: string | null;
-  createdAt: string;
-  vouchers: GiftVoucherRow[];
-  events: {
-    id: string;
-    kind: string;
-    detail: Record<string, unknown>;
-    createdAt: string;
-  }[];
-  mails: { id: string; kind: string; status: string; attempts: number }[];
-};

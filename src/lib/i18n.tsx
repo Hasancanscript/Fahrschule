@@ -15,12 +15,7 @@ export const dict = {
     instructor: { de: "Wer wir sind", fr: "Qui sommes-nous" },
     reviews: { de: "Bewertungen", fr: "Avis" },
     faq: { de: "FAQ", fr: "FAQ" },
-    login: { de: "Anmelden", fr: "Connexion" },
-    register: { de: "Registrieren", fr: "S'inscrire" },
-    booking: { de: "Meine Termine", fr: "Mes rendez-vous" },
-    admin: { de: "Admin", fr: "Admin" },
-    logout: { de: "Abmelden", fr: "Déconnexion" },
-    bookCta: { de: "Fahrstunde buchen", fr: "Réserver une leçon" },
+    bookCta: { de: "Fahrstunde anfragen", fr: "Demander une leçon" },
   },
   hero: {
     badge: { de: "Fahrschule in Biel/Bienne", fr: "Auto-école à Bienne" },
@@ -31,7 +26,7 @@ export const dict = {
       de: "Fahrschule fürs Leben ist eine junge, zweisprachige Fahrschule in Biel/Bienne. Modernes Automatikfahrzeug, ehrliches Feedback und ein Lernprozess, der fürs Leben hält, nicht nur für die Prüfung.",
       fr: "Fahrschule fürs Leben est une auto-école jeune et bilingue à Bienne. Véhicule automatique moderne, feedback honnête et un apprentissage qui dure toute la vie, pas seulement pour l'examen.",
     },
-    ctaBook: { de: "Fahrstunde buchen", fr: "Réserver une leçon" },
+    ctaBook: { de: "Fahrstunde anfragen", fr: "Demander une leçon" },
     ctaMore: { de: "Mehr erfahren", fr: "En savoir plus" },
     stat1: { value: "400+", label: { de: "Fahrschüler:innen", fr: "élèves" } },
     stat2: { value: "1000+", label: { de: "Std. Theorie", fr: "h de théorie" } },
@@ -40,7 +35,7 @@ export const dict = {
   },
   why: {
     eyebrow: { de: "Warum wir?", fr: "Pourquoi nous ?" },
-    title: { de: "Fahrschule, neu gedacht.", fr: "L'auto-école, repensée." },
+    title: { de: "Ehrlich, modern und zweisprachig.", fr: "Honnête, moderne et bilingue." },
     sub: {
       de: "Kein verstaubter Unterricht, keine Floskeln. Nur das, was dich wirklich sicher auf die Strasse bringt.",
       fr: "Pas de cours poussiéreux, pas de clichés. Juste ce qu'il faut pour rouler en sécurité.",
@@ -98,8 +93,8 @@ export const dict = {
       badge: { de: "Am beliebtesten", fr: "Le plus demandé" },
       title: { de: "5er-Abo", fr: "Abo 5 leçons" },
       text: {
-        de: "Fünf Lektionen zum Vorzugspreis, einzeln buchbar, Guthaben verfällt nicht.",
-        fr: "Cinq leçons à prix préférentiel, réservées une à une, crédit sans expiration.",
+        de: "Fünf Lektionen zum Vorzugspreis, Termine einzeln abgemacht, Guthaben verfällt nicht.",
+        fr: "Cinq leçons à prix préférentiel, rendez-vous fixés un à un, crédit sans expiration.",
       },
       price: "CHF 85.00",
       meta: { de: "CHF 35.00 Ersparnis", fr: "CHF 35.00 d'économie" },
@@ -107,8 +102,8 @@ export const dict = {
     vku: {
       title: { de: "VKU", fr: "ECR" },
       text: {
-        de: "Der obligatorische Verkehrskundeunterricht, bequem online reserviert.",
-        fr: "Le cours de théorie obligatoire, réservé facilement en ligne.",
+        de: "Der obligatorische Verkehrskundeunterricht, unkompliziert angefragt.",
+        fr: "Le cours de théorie obligatoire, demandé en toute simplicité.",
       },
       price: "CHF 170.00",
       meta: { de: "Alle Themen, 1 Termin", fr: "Tous les thèmes, 1 séance" },
@@ -116,13 +111,13 @@ export const dict = {
     firstaid: {
       title: { de: "Nothelferkurs", fr: "Premiers secours" },
       text: {
-        de: "Lebensrettende Sofortmassnahmen in Gruppen, bequem online reserviert.",
-        fr: "Gestes qui sauvent, en groupe, réservés facilement en ligne.",
+        de: "Lebensrettende Sofortmassnahmen in Gruppen, unkompliziert angefragt.",
+        fr: "Gestes qui sauvent, en groupe, demandés en toute simplicité.",
       },
       price: { de: "Auf Anfrage", fr: "Sur demande" },
-      meta: { de: "Nächsten Termin wählen", fr: "Choisis ta date" },
+      meta: { de: "Nächsten Termin anfragen", fr: "Demande ta date" },
     },
-    ctaBook: { de: "Jetzt buchen", fr: "Réserver" },
+    ctaBook: { de: "Jetzt anfragen", fr: "Demander" },
     ctaAsk: { de: "Nachfragen", fr: "Demander" },
     perLesson: { de: " / Lektion", fr: " / leçon" },
   },
@@ -134,7 +129,7 @@ export const dict = {
       fr: "Neuf étapes vers le permis, avec la période d’essai et la formation complémentaire.",
     },
     ctaTitle: { de: "Bereit für deine erste Lektion?", fr: "Prêt pour ta première leçon ?" },
-    ctaBook: { de: "Jetzt Fahrstunde buchen", fr: "Réserver une leçon" },
+    ctaBook: { de: "Jetzt Fahrstunde anfragen", fr: "Demander une leçon" },
     rules: DRIVING_RULE_NOTE,
     steps: DRIVING_STEPS,
   },
@@ -321,7 +316,7 @@ export const dict = {
   },
   reviews: {
     eyebrow: { de: "Bewertungen", fr: "Avis" },
-    title: { de: "Was meine Fahrschüler:innen sagen", fr: "Ce que disent mes élèves" },
+    title: { de: "Echte Stimmen, echte Erfolge.", fr: "De vraies voix, de vrais succès." },
     items: [
       {
         text: {
@@ -392,8 +387,8 @@ export const dict = {
       {
         q: { de: "Wie bezahle ich meine Fahrstunden?", fr: "Comment je paie mes leçons ?" },
         a: {
-          de: "Einzeln pro Lektion oder günstiger im 5er-Abo. Dein Guthaben verfällt nicht und wird einfach online beim Buchen abgezogen.",
-          fr: "À l'unité ou plus avantageux avec l'abo 5 leçons. Ton crédit n'expire pas et est déduit automatiquement lors de la réservation en ligne.",
+          de: "Einzeln pro Lektion oder günstiger im 5er-Abo, bar oder mit TWINT. Dein Abo-Guthaben verfällt nicht.",
+          fr: "À l'unité ou plus avantageux avec l'abo 5 leçons, en espèces ou avec TWINT. Ton crédit d'abo n'expire pas.",
         },
       },
       {
@@ -413,8 +408,8 @@ export const dict = {
       {
         q: { de: "Bietet ihr auch VKU und Nothelferkurs an?", fr: "Proposez-vous aussi l'ECR et les premiers secours ?" },
         a: {
-          de: "Ja. Beide Kurse laufen in Gruppen und lassen sich direkt online für einen passenden Termin reservieren.",
-          fr: "Oui. Les deux cours se font en groupe et se réservent directement en ligne pour une date qui te convient.",
+          de: "Ja. Beide Kurse laufen in Gruppen. Schick eine Anfrage und wir sagen dir den nächsten freien Termin.",
+          fr: "Oui. Les deux cours se font en groupe. Envoie une demande et nous te donnons la prochaine date libre.",
         },
       },
     ],
@@ -426,7 +421,7 @@ export const dict = {
       de: "Schreib mir per WhatsApp oder ruf direkt an, ich melde mich persönlich zurück.",
       fr: "Écris-moi sur WhatsApp ou appelle directement, je te réponds personnellement.",
     },
-    ctaBook: { de: "Fahrstunde buchen", fr: "Réserver une leçon" },
+    ctaBook: { de: "Fahrstunde anfragen", fr: "Demander une leçon" },
     ctaWhatsapp: { de: "Auf WhatsApp schreiben", fr: "Écrire sur WhatsApp" },
     phone: { de: "Telefon", fr: "Téléphone" },
     area: { de: "Gebiet", fr: "Région" },

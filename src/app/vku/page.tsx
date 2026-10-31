@@ -30,8 +30,6 @@ const TOPICS = [
 export default function VkuPage() {
   return <TranslatedContent>{(
     <CourseInfoPage
-      apiBase="/api/vku"
-      loginNext="/vku"
       imageSrc="/vku-signs.png"
       imageAlt="VKU-Unterricht"
       eyebrow="Angebote · VKU"
@@ -40,8 +38,8 @@ export default function VkuPage() {
       topics={TOPICS}
       duration="180 Min."
       offerKey="vku"
-      sectionEyebrow="Verfügbare Termine"
-      sectionTitle="Wähle deinen VKU-Termin"
+      sectionEyebrow="Termin anfragen"
+      sectionTitle="Frag deinen VKU-Termin an"
     />
   )}</TranslatedContent>;
 }
